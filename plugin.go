@@ -32,8 +32,9 @@ func (s statType) String() string {
 }
 
 type MetricInfo struct {
-	Label string
-	Unit  string
+	Label    string
+	Unit     string
+	StatType statType
 }
 
 // Plugin プラグインの型
@@ -82,7 +83,7 @@ func (p Plugin) FetchMetrics() (map[string]float64, error) {
 		}
 
 		for _, info := range p.MetricInfos {
-			v, err := p.getLastPoint(d, info.Label, stAve)
+			v, err := p.getLastPoint(d, info.Label, info.StatType)
 			if err == nil {
 				stat[info.Label+"_"+*dimension] = v
 			}

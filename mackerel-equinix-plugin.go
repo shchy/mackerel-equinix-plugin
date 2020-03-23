@@ -8,8 +8,9 @@ func main() {
 	plugin.DimensionMetrics = "HealthyHostCount"
 	plugin.MetricInfos = map[string]MetricInfo{
 		"elb.latency": MetricInfo{
-			Label: "Latency",
-			Unit:  "float",
+			Label:    "Latency",
+			Unit:     "float",
+			StatType: stAve,
 		},
 	}
 	plugin.do()
