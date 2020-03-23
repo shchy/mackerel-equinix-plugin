@@ -61,7 +61,7 @@ func (p Plugin) GraphDefinition() map[string]mp.Graphs {
 				Label: info.Label,
 				Unit:  info.Unit,
 				Metrics: []mp.Metrics{
-					{Name: *dimension + "." + info.Label, Label: *dimension},
+					{Name: info.Label + "_" + *dimension, Label: *dimension},
 				},
 			}
 		}
@@ -85,7 +85,7 @@ func (p Plugin) FetchMetrics() (map[string]float64, error) {
 		for _, info := range p.MetricInfos {
 			v, err := p.getLastPoint(d, info.Label, stAve)
 			if err == nil {
-				stat[*dimension+"."+info.Label] = v
+				stat[info.Label+"_"+*dimension] = v
 			}
 		}
 	}
