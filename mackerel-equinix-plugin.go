@@ -3,21 +3,13 @@ package main
 func main() {
 
 	var plugin Plugin
-	plugin.Namespace = "AWS/DX"
-	plugin.DimensionName = "ConnectionId"
-	plugin.DimensionMetrics = "ConnectionState"
+	plugin.Namespace = "AWS/ELB"
+	plugin.DimensionName = "AvailabilityZone"
+	plugin.DimensionMetrics = "HealthyHostCount"
 	plugin.MetricInfos = map[string]MetricInfo{
-		"dconnect.connection.egress": MetricInfo{
-			Label: "ConnectionBpsEgress",
+		"elb.latency": MetricInfo{
+			Label: "Latency",
 			Unit:  "float",
-		},
-		"dconnect.connection.ingress": MetricInfo{
-			Label: "ConnectionBpsIngress",
-			Unit:  "float",
-		},
-		"dconnect.connection.crcerror": MetricInfo{
-			Label: "ConnectionCRCErrorCount",
-			Unit:  "integer",
 		},
 	}
 	plugin.do()
