@@ -54,16 +54,15 @@ type Plugin struct {
 func (p Plugin) GraphDefinition() map[string]mp.Graphs {
 	var graphdef = map[string]mp.Graphs{}
 
-	for _, dimension := range p.Dimensions {
-
-		for grp, info := range p.MetricInfos {
-			graphdef[grp] = mp.Graphs{
-				Label: info.Label,
-				Unit:  info.Unit,
-				Metrics: []mp.Metrics{
-					{Name: info.Label + "_" + *dimension, Label: *dimension},
-				},
-			}
+	for grp, info := range p.MetricInfos {
+		var metrics []mp.Metrics
+		for _, dimension := range p.Dimensions {
+			metrics = append(metrics, mp.Metrics{Name: info.Label + "_" + *dimension, Label: *dimension})
+		}
+		graphdef[grp] = mp.Graphs{
+			Label:   info.Label,
+			Unit:    info.Unit,
+			Metrics: metrics,
 		}
 	}
 	return graphdef
