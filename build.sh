@@ -1,1 +1,1 @@
-env GOOS=linux GOARCH="amd64" go build mackerel-equinix-plugin.go 
+env GOOS=linux GOARCH="amd64" go build .
